@@ -225,6 +225,11 @@ def build_samples(title, sources, min_sources):
                 'published': published
             })
             if d is not None:
+                # Text under 400 chars usually means the page 404'd,
+                # or the text is just too short to be an "article".
+                if len(d['body']) <= 400:
+                    logger.info('\t\tBody too short, skipping')
+                    continue
                 a = Article(**d)
                 e.articles.append(a)
             else:

@@ -26,7 +26,10 @@ Some heuristics are used to try and build quality clusters:
 
 - only whitelisted sources are considered
 - source articles should be published within 3 days of each other (sometimes WikiNews entries will refer to older stories)
+- articles which are shorter than or equal to 400 characters are skipped - article bodies this short usually indicate that we've hit a 404 page, and generally articles this short are uninteresting
 
 Then you can export that data, i.e.
 
     $ mongoexport -d focusgroup -c event --jsonArray -o ~/Desktop/sample_events.json
+
+You may need to do a bit of manual cleaning afterwards. There is an included `preview.py` script which randomly grabs an event and prints out its articles' bodies. Sometimes the content extraction algorithm pulls out the wrong stuff, or extra cruft gets pulled in (social media prompts, advertisement captions, etc); running the preview script a few times can help you build some heuristics to better clean the data. Or maybe you want to keep it in! Who knows
