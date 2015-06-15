@@ -5,10 +5,15 @@ from focusgroup.models import Event
 
 
 if __name__ == '__main__':
-    n = int(sys.argv[1])
+    n = sys.argv[1]
+    N = Event.objects.count() - 1
+
+    if n == 'all':
+        n = N
+    else:
+        n = int(n)
     out = sys.argv[2]
 
-    N = Event.objects.count()
     if n > N:
         n = N
 
